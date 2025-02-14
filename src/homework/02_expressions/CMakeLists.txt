@@ -1,4 +1,4 @@
-﻿cmake_minimum_required (VERSION 3.8)
+﻿cmake_minimum_required (VERSION 3.2)
 project(hw_02_library)
 
 add_library(hw_02_library "hwexpressions.cpp" "hwexpressions.h")
