@@ -8,7 +8,7 @@ bool TicTacToe::game_over()
         return true;
     }
     else if (check_board_full()) {
-        winner = "C";
+        winner = "C";  // C for tie
         return true;
     }
     return false;
@@ -47,7 +47,7 @@ bool TicTacToe::check_diagonal_win()
 
 void TicTacToe::set_winner() 
 {
-    winner = (player == "X") ? "O" : "X";
+    winner = player;  // the last player made the winning move
 }
 
 std::string TicTacToe::get_winner() const 
@@ -63,9 +63,17 @@ void TicTacToe::start_game(std::string first_player)
 
 void TicTacToe::mark_board(int position) 
 {
-    pegs[position-1] = player;
+    pegs[position - 1] = player;
+
+    if (game_over()) {
+        return;
+    }
+
     set_next_player();
 }
+
+
+
 
 std::string TicTacToe::get_player() const 
 {
@@ -87,7 +95,7 @@ void TicTacToe::set_next_player()
 
 bool TicTacToe::check_board_full() 
 {
-    for (auto peg : pegs) {
+    for (auto& peg : pegs) {
         if (peg == " ") return false;
     }
     return true;
@@ -95,6 +103,7 @@ bool TicTacToe::check_board_full()
 
 void TicTacToe::clear_board() 
 {
-    pegs = {" ", " ", " ", " ", " ", " ", " ", " ", " "};
+    pegs = { " ", " ", " ", " ", " ", " ", " ", " ", " " };
     winner = "";
 }
+
